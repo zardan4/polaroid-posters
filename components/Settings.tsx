@@ -9,7 +9,6 @@ import clsx from "clsx";
 // @ts-expect-error no types provided by a library
 import domtoimage from "dom-to-image";
 import Loader from "./Loader";
-import FilerobotImageEditor from "react-filerobot-image-editor";
 
 export default function Settings({
 	poster,
@@ -23,34 +22,13 @@ export default function Settings({
 	const pictureInputRef = useRef<HTMLInputElement>(null);
 	const [saving, setSaving] = useState(false);
 
-	const [isImgEditorShown, setIsImgEditorShown] = useState(false);
-	const [imgEditorTmp, setImgEditorTmp] = useState<string | undefined>(
-		undefined
-	);
+	// const [isImgEditorShown, setIsImgEditorShown] = useState(false);
+	// const [imgEditorTmp, setImgEditorTmp] = useState<string | undefined>(
+	// 	undefined
+	// );
 
 	return (
 		<div>
-			{isImgEditorShown ? (
-				<FilerobotImageEditor source={imgEditorTmp as string} savingPixelRatio={1} previewPixelRatio={1} />
-				// <FilerobotImageEditor
-				// 	source={imgEditorTmp as string}
-				// 	onSave={(editedImageObject, designState) =>
-				// 		console.log("saved", editedImageObject, designState)
-				// 	}
-				// 	// onClose={closeImgEditor}
-				// 	annotationsCommon={{
-				// 		fill: "#ff0000",
-				// 	}}
-				// 	savingPixelRatio={1}
-				// 	previewPixelRatio={1}
-				// 	Text={{ text: "Filerobot..." }}
-				// 	Rotate={{ angle: 90, componentType: "slider" }}
-				// 	// tabsIds={[editor.TABS.ADJUST, editor.TABS.ANNOTATE, editor.TABS.WATERMARK]} // or {['Adjust', 'Annotate', 'Watermark']}
-				// 	// defaultTabId={editor.TABS.ANNOTATE} // or 'Annotate'
-				// 	// defaultToolId={editor.TOOLS.TEXT} // or 'Text'
-				// />
-			) : null}
-
 			<h3 className="font-afacad lowercase text-4xl text-gray-800 font-medium">
 				Poster
 			</h3>
@@ -68,12 +46,12 @@ export default function Settings({
 						const file = pictureInputRef.current?.files?.[0];
 
 						if (file && file.type.startsWith("image/")) {
-							// setPoster({
-							// 	...poster,
-							// 	pictureURL: URL.createObjectURL(file),
-							// });
-							setIsImgEditorShown(true);
-							setImgEditorTmp(URL.createObjectURL(file));
+							setPoster({
+								...poster,
+								pictureURL: URL.createObjectURL(file),
+							});
+							// setIsImgEditorShown(true);
+							// setImgEditorTmp(URL.createObjectURL(file));
 						}
 					}}
 					type="file"
